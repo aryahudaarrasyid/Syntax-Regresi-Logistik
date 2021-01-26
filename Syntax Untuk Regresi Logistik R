@@ -1,0 +1,13 @@
+library(readr)
+data_reglog <- read.csv()
+view(data_reglog)
+str(data_reglog) # Melihat struktur datanya apabila data Y berupa integer maka harus diubah menjadi factor
+data_reglog$Y <- as.factor(data_reglog$Y) # Membuat data menjadi factor
+model <- glm(Y ~ X1 + X2 + X3, data = data_reglog, family = "binomial")
+print(model)
+summary(model) #uji signifikansi
+prediksi <- predict(model,data_reglog,type="response")
+head(prediksi)
+
+library(generalhoslem)
+logitgof(data_reglog$Y, fitted(model)) #uji godness of fit
